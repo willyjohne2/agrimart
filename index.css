@@ -578,17 +578,82 @@ footer h4::after {
     color: #555;
 }
 
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+
+    .footer-grid {
+        justify-content: flex-start;
+        gap: 30px;
+    }
+}
+
 @media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        z-index: 2005;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--dark-green);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s ease-in-out;
+        z-index: 2000;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .footer-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .footer-column {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .footer-contact p {
+        justify-content: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
     .modal-grid {
         grid-template-columns: 1fr;
     }
 
-    .hero-content h1 {
-        font-size: 2.2rem;
+    .modal-image {
+        height: 250px;
     }
 
-    .nav-links {
-        display: none;
-       
+    .modal-info {
+        padding: 30px;
     }
 }
