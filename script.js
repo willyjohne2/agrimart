@@ -89,6 +89,7 @@ let cart = {
 const productGrid = document.getElementById('product-grid');
 const cartCount = document.getElementById('cart-count');
 const cartTotal = document.getElementById('cart-total');
+const cartStatus = document.querySelector('.cart-status');
 const testimonialContent = document.getElementById('testimonial-content');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
@@ -138,6 +139,16 @@ function updateCartUI() {
     }
 }
 
+// Cart Feedback on Click
+cartStatus.onclick = () => {
+    if (cart.count === 0) {
+        alert("Your cart is empty. Please add items to the cart!");
+    } else {
+        const itemNames = cart.items.map(i => i.name).join(', ');
+        alert(`You have ${cart.count} items in your cart: ${itemNames}. Total: KSh ${cart.total.toLocaleString()}`);
+    }
+};
+
 // Modal Logic
 function openDetails(productId) {
     const product = products.find(p => p.id === productId);
@@ -168,24 +179,36 @@ window.onclick = function(event) {
     }
 }
 
+const overlay = document.getElementById('navbar-overlay');
+
 // Hamburger Toggle
-hamburger.onclick = () => {
+function toggleMenu() {
     navLinks.classList.toggle('active');
+    overlay.classList.toggle('active');
     const icon = hamburger.querySelector('i');
     if (navLinks.classList.contains('active')) {
         icon.classList.remove('fa-bars');
         icon.classList.add('fa-times');
+        document.body.style.overflow = 'hidden'; // Prevent scroll
     } else {
         icon.classList.remove('fa-times');
         icon.classList.add('fa-bars');
+        document.body.style.overflow = ''; // Re-enable scroll
     }
-};
+}
+
+hamburger.onclick = toggleMenu;
+
+// Close menu when clicking overlay
+overlay.onclick = toggleMenu;
 
 // Close menu when clicking link
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.onclick = () => {
         navLinks.classList.remove('active');
+        overlay.classList.remove('active');
         hamburger.querySelector('i').className = 'fas fa-bars';
+        document.body.style.overflow = '';
     };
 });
 
