@@ -196,8 +196,10 @@ function renderTestimonial() {
     const t = testimonials[testimonialIndex];
     testimonialContent.innerHTML = `
         <div class="testimonial-item">
-            <p>"${t.text}"</p>
-            <h4>- ${t.author}</h4>
+            <div class="testimonial-card">
+                <p>${t.text}</p>
+                <h4>- ${t.author}</h4>
+            </div>
         </div>
     `;
 }
