@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/contacts.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+</head>
+<body class="no-cart">
+   
+         <header></header>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 class="section-title">Get In Touch With Us</h2>
+            
+            <!-- Contact Info Cards -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">📍</div>
+                    <h3>Visit Us</h3>
+                    <p>Agri-Mart Towers, Kutus</p>
+                    <p class="detail">Kirinyaga, Kenya</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>Sales: +254 700 000 000</p>
+                    <p class="detail">Support: +254 711 111 111</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">📧</div>
+                    <h3>Email Us</h3>
+                    <p>info@agrimart.co.ke</p>
+                    <p class="detail">sales@agrimart.co.ke</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⏰</div>
+                    <h3>Working Hours</h3>
+                    <p>Mon-Fri: 8am - 5pm</p>
+                    <p class="detail">Sat: 9am - 1pm</p>
+                </div>
+            </div>
+
+            <!-- Main Contact Container -->
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>We'd Love to Hear From You</h3>
+                    <p>Whether you're looking for farming equipment or need support, our team is ready to assist. Fill out the form and we'll get back to you within 24 hours.</p>
+                    
+                    <div class="business-hours">
+                        <h4>Business Hours</h4>
+                        <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM</p>
+                        <p><strong>Saturday:</strong> 9:00 AM - 1:00 PM</p>
+                        <p><strong>Sunday:</strong> Closed</p>
+                    </div>
+
+                  <div class="social-links">
+                       <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                       <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                       <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                       <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                  </div>
+                </div>
+
+                <div class="contact-form" id="contactForm">
+                    <div class="success-message" id="successMessage">
+                        Thank you! Your message has been sent successfully.
+                    </div>
+
+                    <div class="form-group" id="nameGroup">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" placeholder="Sharp Boy">
+                        <div class="error-message">Please enter your name</div>
+                    </div>
+
+                    <div class="form-group" id="emailGroup">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="agri@example.com">
+                        <div class="error-message">Please enter a valid email</div>
+                    </div>
+
+                    <div class="form-group" id="phoneGroup">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+254 700 000 000">
+                        <div class="error-message">Please enter a valid phone number</div>
+                    </div>
+
+                    <div class="form-group" id="subjectGroup">
+                        <label for="subject">Subject *</label>
+                        <select id="subject">
+                            <option value="">Select a subject</option>
+                            <option value="sales">Sales Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="parts">Spare Parts</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="error-message">Please select a subject</div>
+                    </div>
+
+                    <div class="form-group" id="messageGroup">
+                        <label for="message">Message *</label>
+                        <textarea id="message" placeholder="How can we help you?"></textarea>
+                        <div class="error-message">Please enter your message</div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="submitForm()">Send Message</button>
+                </div>
+            </div>
+
+            <!-- Simple Map Section -->
+            <div class="map-section">
+                <h3 class="section-title center">Our Location</h3>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <span class="map-pin">📍</span>
+                        <p>Agrimart Headquarters</p>
+                        <p>Kutus, Kirinyaga, Kenya</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+        <script src="assets/js/include-header-footer.js"></script>
+    <script src="assets/js/contacts.js"></script>
+</body>
+</html>

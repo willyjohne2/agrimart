@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Navigation */
+.navbar {
+    background-color: var(--dark-green);
+    color: var(--white);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--white);
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+}
+
+.nav-links a:hover {
+    color: var(--accent-orange);
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--white);
+    padding: 10px;
+}
+
+.cart-status {
+    background: rgba(255, 255, 255, 0.12);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cart-status:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.cart-status i {
+    margin-right: 8px;
+    color: var(--accent-orange);
+}
+
+/* Navigation Overlay */
+.navbar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.navbar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 900px) {
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 60%;
+        height: 100vh;
+        background: var(--dark-green);
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 50px;
+        transition: 0.5s ease-in-out;
+        z-index: 2000;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+}
+
+/* Hide cart on specific pages */
+body.no-cart .cart-status,
+body.no-cart #cart-drawer {
+    display: none !important;
+}
