@@ -105,7 +105,7 @@ h2::after {
 /* Hero Section */
 .hero {
     height: 80vh;
-    background: url('../../img/tractor1.jpeg') no-repeat center center/cover;
+    background: url('../img/tractor1.jpeg') no-repeat center center/cover;
     position: relative;
     display: flex;
     align-items: center;

@@ -4,59 +4,66 @@ const products = [
         id: 1,
         name: "Eco-Harvest Pro Tractor",
         price: 4500000,
-        image: "img/tractor1.jpeg",
+        image: "tractor1.jpeg",
         description: "A high-performance, fuel-efficient tractor designed for large-scale farming. Features advanced GPS navigation and ergonomic controls."
     },
     {
         id: 2,
         name: "Wheat Master Harvester",
         price: 12000000,
-        image: "img/harvester.jpg",
+        image: "harvester.jpg",
         description: "State-of-the-art wheat harvester with superior grain separation technology and a wide header for maximum efficiency."
     },
     {
         id: 3,
         name: "Greenfield Irrigation System",
         price: 1500000,
-        image: "../img/irrigation.png",
+        image: "irrigation.png",
         description: "Automated smart irrigation system with soil moisture sensors and precision spray nozzles to conserve water."
     },
     {
         id: 4,
         name: "Compact Utility Tractor",
         price: 2800000,
-        image: "img/tractor2.jpeg",
+        image: "tractor2.jpeg",
         description: "Versatile utility tractor perfect for small to medium farms. compatible with hundreds of attachments for all-season use."
     },
     {
         id: 5,
         name: "Industrial Hay Baler",
         price: 3500000,
-        image: "img/hay.jpg",
+        image: "hay.jpg",
         description: "High-density hay baler capable of producing uniform, tightly packed bales for easy storage and transport."
     },
     {
         id: 6,
         name: "Automated Milking Machine",
         price: 5500000,
-        image: "img/mliking1.jpg",
+        image: "mliking1.jpg",
         description: "Gentle and efficient automated milking system designed to maximize yield while ensuring the comfort of your livestock."
     },
     {
         id: 7,
         name: "Terrain King Tractor",
         price: 6200000,
-        image: "img/tractor3.jpeg",
+        image: "tractor3.jpeg",
         description: "Heavy-duty tractor built for tough terrains. 4WD with high torque engine and reinforced chassis."
     },
     {
         id: 8,
         name: "Pro-Series Grain Harvester",
         price: 13500000,
-        image: "img/harvester2.jpg",
+        image: "harvester2.jpg",
         description: "Next-gen harvester with AI-driven harvest optimization and high-capacity grain tank for fewer stops."
     }
 ];
+
+// Helper to resolve image paths based on current directory
+function getProductImagePath(imgName) {
+    const isSubPage = window.location.pathname.includes('/pages/');
+    const basePath = isSubPage ? '../assets/img/' : 'assets/img/';
+    return basePath + imgName;
+}
 
 // Testimonials Data
 const testimonials = [
@@ -177,7 +184,7 @@ function renderProducts() {
     productGrid.innerHTML = products.map(product => `
         <div class="product-card">
             <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
+                <img src="${getProductImagePath(product.image)}" alt="${product.name}">
             </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
@@ -225,7 +232,7 @@ function renderCart() {
 
     cartItemsContainer.innerHTML = cart.items.map((item, index) => `
         <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+            <img src="${getProductImagePath(item.image)}" alt="${item.name}" class="cart-item-img">
             <div class="cart-item-info">
                 <h4>${item.name}</h4>
                 <p>KSh ${item.price.toLocaleString()}</p>
@@ -275,7 +282,7 @@ function openDetails(productId) {
     modalBody.innerHTML = `
         <div class="modal-grid">
             <div class="modal-image">
-                <img src="${product.image}" alt="${product.name}">
+                <img src="${getProductImagePath(product.image)}" alt="${product.name}">
             </div>
             <div class="modal-info">
                 <h2>${product.name}</h2>

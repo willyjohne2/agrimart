@@ -1,4 +1,4 @@
- (function() {
+  (function() {
       // ----- PRODUCT DATA (machinery with images, prices, specs) -----
       const products = [
         {
@@ -51,6 +51,13 @@
         }
       ];
 
+      // Helper to resolve image paths based on current directory
+      function getProductImagePath(imgName) {
+          const isSubPage = window.location.pathname.includes('/pages/');
+          const basePath = isSubPage ? '../assets/img/' : 'assets/img/';
+          return basePath + imgName;
+      }
+
       const gallery = document.getElementById('gallery');
       const filterBtns = document.querySelectorAll('.filter-btn');
 
@@ -61,7 +68,7 @@
           if (filter === 'all' || prod.category === filter) {
             html += `
               <div class="card" data-category="${prod.category}">
-                <img class="card-img" src="${prod.image}" alt="${prod.alt}" loading="lazy">
+                <img class="card-img" src="${getProductImagePath(prod.image)}" alt="${prod.alt}" loading="lazy">
                 <div class="card-content">
                   <div class="card-title">${prod.name}</div>
                   <div class="card-price">${prod.price}</div>
