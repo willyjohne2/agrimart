@@ -18,6 +18,7 @@ function includeHTML(selector, url) {
 
 document.addEventListener("DOMContentLoaded", function () {
     // Use root-relative paths for Vercel compatibility
-    includeHTML("header", "/includes/header2.html");
-    includeHTML("footer", "/includes/footer.html");
+        includeHTML("header", "/agrimart/includes/header2.html");
+    includeHTML("footer", "/agrimart/includes/footer.html");
+
 });
