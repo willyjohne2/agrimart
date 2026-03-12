@@ -60,9 +60,7 @@ const products = [
 
 // Helper to resolve image paths based on current directory
 function getProductImagePath(imgName) {
-    const isSubPage = window.location.pathname.includes('/pages/');
-    const basePath = isSubPage ? '../assets/img/' : 'assets/img/';
-    return basePath + imgName;
+    return '/assets/img/' + imgName;
 }
 
 // Testimonials Data
