@@ -17,9 +17,12 @@ function includeHTML(selector, url) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Use root-relative paths for Vercel compatibility
+    // Determine the base path based on current location
+    const isLocal = window.location.protocol === 'file:';
+    const basePath = isLocal ? '' : '/';
+    
     Promise.all([
-        includeHTML("header", "/includes/header2.html"),
-        includeHTML("footer", "/includes/footer.html")
+        includeHTML("header", "includes/header2.html"),
+        includeHTML("footer", "includes/footer.html")
     ]);
 });
