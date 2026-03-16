@@ -53,7 +53,7 @@
 
       // Helper to resolve image paths based on current directory
       function getProductImagePath(imgName) {
-          return '/assets/img/' + imgName;
+          return 'assets/img/' + imgName;
       }
 
       const gallery = document.getElementById('gallery');

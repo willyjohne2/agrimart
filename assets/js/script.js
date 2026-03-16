@@ -60,7 +60,7 @@ const products = [
 
 // Helper to resolve image paths based on current directory
 function getProductImagePath(imgName) {
-    return '/assets/img/' + imgName;
+    return 'assets/img/' + imgName;
 }
 
 // Testimonials Data
