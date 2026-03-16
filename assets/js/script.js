@@ -116,58 +116,96 @@ function initializeUI() {
     drawerTotal = document.getElementById('drawer-cart-total');
     payBtn = document.getElementById('pay-btn');
 
-    // Re-bind click listeners that might have been lost or were missing
-    if (cartStatus) {
-        cartStatus.onclick = toggleCart;
-    }
+    console.log("UI Initialized. Hamburger found:", !!hamburger);
 
+    // Re-bind click listeners
+    if (cartStatus) cartStatus.onclick = toggleCart;
     if (closeCartBtn) closeCartBtn.onclick = toggleCart;
     
     if (payBtn) {
         payBtn.onclick = () => {
             if (cart.items.length === 0) return;
             alert("✨ Processing payment for KSh " + cart.total.toLocaleString() + "...\nThank you for choosing Agri-Mart!");
-            cart.items = [];
-            cart.count = 0;
-            cart.total = 0;
-            updateCartUI();
-            renderCart();
-            toggleCart();
+            cart.items = []; cart.count = 0; cart.total = 0;
+            updateCartUI(); renderCart(); toggleCart();
         };
     }
 
     if (closeModal) closeModal.onclick = closeModalFunction;
-    if (hamburger) hamburger.onclick = toggleMenu;
-    if (overlay) overlay.onclick = toggleMenu;
+    
+    if (hamburger) {
+        hamburger.onclick = (e) => {
+            console.log("Hamburger clicked");
+            toggleMenu();
+        };
+        // Add touchstart for mobile responsiveness
+        hamburger.ontouchstart = (e) => {
+            console.log("Hamburger touched");
+            e.preventDefault();
+            toggleMenu();
+        };
+    }
+    
+    if (overlay) {
+        overlay.onclick = () => {
+            console.log("Overlay clicked");
+            toggleMenu();
+        };
+    }
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.onclick = () => {
-            if (navLinks) navLinks.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-            if (hamburger) {
-                const icon = hamburger.querySelector('i');
-                if (icon) icon.className = 'fas fa-bars';
+    const navLinksList = document.querySelector('.nav-links');
+    if (navLinksList) {
+        // Remove ANY existing listeners to prevent conflicts
+        navLinksList.onclick = null;
+        
+        // Use a single, clean delegation listener
+        navLinksList.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link) {
+                console.log("MOBILE LINK CLICKED:", link.href);
+                
+                // Allow the click but close things immediately
+                if (navLinks) navLinks.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (hamburger) {
+                    const icon = hamburger.querySelector('i');
+                    if (icon) icon.className = 'fas fa-bars';
+                }
+                document.body.style.overflow = '';
+                
+                // Navigation will happen naturally via the anchor tag
             }
-            document.body.style.overflow = '';
-        };
-    });
-
-    if (prevBtn) {
-        prevBtn.onclick = () => {
-            testimonialIndex = (testimonialIndex - 1 + testimonials.length) % testimonials.length;
-            renderTestimonial();
-        };
+        }, true);
     }
 
-    if (nextBtn) {
-        nextBtn.onclick = () => {
-            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
-            renderTestimonial();
-        };
-    }
+    if (prevBtn) prevBtn.onclick = () => { testimonialIndex = (testimonialIndex - 1 + testimonials.length) % testimonials.length; renderTestimonial(); };
+    if (nextBtn) nextBtn.onclick = () => { testimonialIndex = (testimonialIndex + 1) % testimonials.length; renderTestimonial(); };
 
-    // Refresh UI with current cart state
+    // Highlight active page link
+    highlightActiveLink();
+
     updateCartUI();
+}
+
+function highlightActiveLink() {
+    const currentPath = window.location.pathname;
+    const navLinksList = document.querySelectorAll('.nav-links a');
+    
+    navLinksList.forEach(link => {
+        // Remove existing active class
+        link.classList.remove('active');
+        
+        const linkPath = link.getAttribute('href');
+        
+        // Match home page (both / and /index.html)
+        if ((currentPath === '/' || currentPath === '/index.html' || currentPath === '') && (linkPath === '/index.html' || linkPath === '/')) {
+            link.classList.add('active');
+        } 
+        // Match other pages
+        else if (currentPath.includes(linkPath) && linkPath !== '/index.html' && linkPath !== '/') {
+            link.classList.add('active');
+        }
+    });
 }
 
 // Listen for contentLoaded event from include-header-footer.js
@@ -200,6 +238,11 @@ function renderProducts() {
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
+    // Check if product is already in the cart
+    if (cart.items.some(item => item.id === productId)) {
+        alert("This item is already in your cart.");
+        return;
+    }
     cart.items.push(product);
     cart.count = cart.items.length;
     cart.total += product.price;
@@ -307,24 +350,29 @@ window.onclick = function (event) {
 // overlay already declared at the top
 
 function toggleMenu() {
-    if (!navLinks || !overlay || !hamburger) return;
-    navLinks.classList.toggle('active');
-    overlay.classList.toggle('active');
-    const icon = hamburger.querySelector('i');
-    if (navLinks.classList.contains('active')) {
-        if (icon) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
+    navLinks = document.getElementById('nav-links');
+    overlay = document.getElementById('navbar-overlay');
+    hamburger = document.getElementById('hamburger');
+    
+    console.log("Toggle Menu triggered. NavLinks:", !!navLinks, "Overlay:", !!overlay, "Hamburger:", !!hamburger);
+    
+    if (!navLinks) return;
+
+    const isActive = navLinks.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+    
+    if (hamburger) {
+        const icon = hamburger.querySelector('i');
+        if (isActive) {
+            if (icon) icon.className = 'fas fa-times';
+            document.body.style.overflow = 'hidden';
+        } else {
+            if (icon) icon.className = 'fas fa-bars';
+            document.body.style.overflow = '';
         }
-        document.body.style.overflow = 'hidden'; // Prevent scroll
-    } else {
-        if (icon) {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
-        document.body.style.overflow = ''; // Re-enable scroll
     }
 }
+
 
 // hamburger listener moved to initializeUI()
 

@@ -1,6 +1,6 @@
 // Dynamically include header and footer from external HTML files
 function includeHTML(selector, url) {
-    fetch(url)
+    return fetch(url)
         .then((response) => response.text())
         .then((data) => {
             const element = document.querySelector(selector);
@@ -18,7 +18,8 @@ function includeHTML(selector, url) {
 
 document.addEventListener("DOMContentLoaded", function () {
     // Use root-relative paths for Vercel compatibility
-        includeHTML("header", "/agrimart/includes/header2.html");
-    includeHTML("footer", "/agrimart/includes/footer.html");
-
+    Promise.all([
+        includeHTML("header", "/includes/header2.html"),
+        includeHTML("footer", "/includes/footer.html")
+    ]);
 });
